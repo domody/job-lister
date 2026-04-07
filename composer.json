@@ -1,11 +1,13 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/react-starter-kit",
+    "name": "domody/job-lister",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "A simple job listing board build with Laravel and Inertia",
     "keywords": [
         "laravel",
-        "framework"
+        "job-bpard",
+        "job-listings",
+        "inertia"
     ],
     "license": "MIT",
     "require": {
