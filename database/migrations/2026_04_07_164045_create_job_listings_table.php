@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('location');
             $table->unsignedInteger('salary_min');
             $table->unsignedInteger('salary_max');
-            $table->enum('type', ['full-time', 'part-time', 'contract', 'freelance', 'remote']);
+            $table->enum('type', ['full-time', 'part-time', 'contract', 'freelance']);
             $table->text('description');
             $table->timestamps();
         });
