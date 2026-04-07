@@ -19,7 +19,7 @@ export default function JobList({ jobs }: { jobs: JobListing[] }) {
     return (
         <>
             <Head title="Jobs" />
-            <div className="flex min-h-screen flex-col items-center">
+            <div className="flex flex-col items-center">
                 {/* Hero */}
                 <div className="bg- w-full py-16">
                     <div className="container mx-auto flex flex-col gap-2 px-4">
