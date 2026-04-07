@@ -5,7 +5,7 @@
     "description": "A simple job listing board build with Laravel and Inertia",
     "keywords": [
         "laravel",
-        "job-bpard",
+        "job-board",
         "job-listings",
         "inertia"
     ],

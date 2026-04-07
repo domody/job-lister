@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
 Route::get('/', [JobListingController::class, 'index'])->name('home');
-// Route::get('jobs', [JobListingController::class, 'index'])->name('jobs');
 Route::get('jobs/{job}', [JobListingController::class, 'show'])->name('jobs.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
