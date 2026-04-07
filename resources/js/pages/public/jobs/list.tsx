@@ -21,7 +21,7 @@ export default function JobList({ jobs }: { jobs: JobListing[] }) {
             <Head title="Jobs" />
             <div className="flex flex-col items-center">
                 {/* Hero */}
-                <div className="bg- w-full py-16">
+                <div className="bg- w-full pt-16">
                     <div className="container mx-auto flex flex-col gap-2 px-4">
                         <h1 className="text-4xl font-semibold">
                             Find your dream job
@@ -54,51 +54,65 @@ export default function JobList({ jobs }: { jobs: JobListing[] }) {
                                 <div className="h-96 w-[420px] rounded-sm border"></div>
                                 {/* List */}
                                 {jobs.length > 0 ? (
-                                    <ItemGroup className="flex-1 gap-2">
-                                        {jobs.map((job) => {
-                                            return (
-                                                <Item
-                                                    key={job.id}
-                                                    variant={'muted'}
-                                                    className="group/job hover:shadow"
-                                                    asChild
-                                                >
-                                                    <Link
-                                                        href={`/jobs/${job.id}`}
+                                    <>
+                                        <ItemGroup className="flex-1 gap-2">
+                                            <div className="w-full flex justify-end items-center">
+                                                <p className="text-xs text-muted-foreground ml-auto">
+                                                    {jobs.length} jobs found
+                                                </p>
+                                            </div>
+                                            {jobs.map((job) => {
+                                                return (
+                                                    <Item
+                                                        key={job.id}
+                                                        variant={'muted'}
+                                                        className="group/job hover:shadow"
+                                                        asChild
                                                     >
-                                                        <ItemContent>
-                                                            <ItemTitle className="group-hover/job:underline">
-                                                                {job.title}
-                                                            </ItemTitle>
-                                                            <ItemDescription>
-                                                                {job.company},{' '}
-                                                                {job.location}
-                                                            </ItemDescription>
-                                                            <div className="mt-1 flex flex-row flex-wrap gap-2">
-                                                                <Badge
-                                                                    variant={
-                                                                        'secondary'
+                                                        <Link
+                                                            href={`/jobs/${job.id}`}
+                                                        >
+                                                            <ItemContent>
+                                                                <ItemTitle className="group-hover/job:underline">
+                                                                    {job.title}
+                                                                </ItemTitle>
+                                                                <ItemDescription>
+                                                                    {
+                                                                        job.company
                                                                     }
-                                                                >
-                                                                    £
-                                                                    {job.salary_min.toLocaleString()}{' '}
-                                                                    - £
-                                                                    {job.salary_max.toLocaleString()}
-                                                                </Badge>
-                                                                <Badge
-                                                                    variant={
-                                                                        'secondary'
+                                                                    ,{' '}
+                                                                    {
+                                                                        job.location
                                                                     }
-                                                                >
-                                                                    {job.type}
-                                                                </Badge>
-                                                            </div>
-                                                        </ItemContent>
-                                                    </Link>
-                                                </Item>
-                                            );
-                                        })}{' '}
-                                    </ItemGroup>
+                                                                </ItemDescription>
+                                                                <div className="mt-1 flex flex-row flex-wrap gap-2">
+                                                                    <Badge
+                                                                        variant={
+                                                                            'secondary'
+                                                                        }
+                                                                    >
+                                                                        £
+                                                                        {job.salary_min.toLocaleString()}{' '}
+                                                                        - £
+                                                                        {job.salary_max.toLocaleString()}
+                                                                    </Badge>
+                                                                    <Badge
+                                                                        variant={
+                                                                            'secondary'
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            job.type
+                                                                        }
+                                                                    </Badge>
+                                                                </div>
+                                                            </ItemContent>
+                                                        </Link>
+                                                    </Item>
+                                                );
+                                            })}{' '}
+                                        </ItemGroup>
+                                    </>
                                 ) : (
                                     <div>Nothing here</div>
                                 )}
