@@ -12,10 +12,27 @@ import {
     ItemTitle,
 } from '@/components/ui/item';
 import { Separator } from '@/components/ui/separator';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { SearchIcon } from 'lucide-react';
+import { useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function JobList({ jobs }: { jobs: JobListing[] }) {
+    const { filters } = usePage().props;
+
+    const [search, setSearch] = useState(filters.search ?? '');
+
+    const handleSearch = useDebouncedCallback((value: string) => {
+        router.get(
+            '/jobs',
+            { search: value },
+            {
+                preserveState: true,
+                replace: true,
+            },
+        );
+    }, 300);
+
     return (
         <>
             <Head title="Jobs" />
@@ -40,8 +57,12 @@ export default function JobList({ jobs }: { jobs: JobListing[] }) {
                             {/* Search */}
                             <InputGroup className="h-12">
                                 <InputGroupInput
-                                    id=""
                                     placeholder="Search job title or keyword"
+                                    value={search}
+                                    onChange={(e) => {
+                                        setSearch(e.target.value);
+                                        handleSearch(e.target.value);
+                                    }}
                                 />
                                 <InputGroupAddon align={'inline-start'}>
                                     <SearchIcon className="text-muted-foreground" />
@@ -51,13 +72,13 @@ export default function JobList({ jobs }: { jobs: JobListing[] }) {
                             {/* Jobs */}
                             <div className="flex flex-row gap-2">
                                 {/* Filter */}
-                                <div className="h-96 w-[420px] rounded-sm border"></div>
+                                <div className="h-96 w-100 rounded-sm border"></div>
                                 {/* List */}
                                 {jobs.length > 0 ? (
                                     <>
                                         <ItemGroup className="flex-1 gap-2">
-                                            <div className="w-full flex justify-end items-center">
-                                                <p className="text-xs text-muted-foreground ml-auto">
+                                            <div className="flex w-full items-center justify-end">
+                                                <p className="ml-auto text-xs text-muted-foreground">
                                                     {jobs.length} jobs found
                                                 </p>
                                             </div>

@@ -8,10 +8,18 @@ use Inertia\Inertia;
 
 class JobListingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Inertia::render('public/jobs/list', [
-            'jobs' => JobListing::all()
+        $jobs = JobListing::query()
+            ->when($request->search, function ($query, $search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('company', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return inertia('public/jobs/list', [
+            'jobs' => $jobs,
+            'filters' => $request->only('search'),
         ]);
     }
 
