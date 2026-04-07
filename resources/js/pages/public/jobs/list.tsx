@@ -56,7 +56,7 @@ export default function JobList({ jobs }: { jobs: JobListing[] }) {
         newSalary: [number, number],
     ) => {
         router.get(
-            '/jobs',
+            '/',
             {
                 search: newSearch,
                 type: newTypes,

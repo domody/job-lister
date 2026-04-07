@@ -19,7 +19,7 @@ export default function JobShow({ job }: { job: JobListing }) {
                 <div className="w-full pt-16 pb-8">
                     <div className="container mx-auto flex flex-col gap-4 px-4">
                         <Link
-                            href="/jobs"
+                            href="/"
                             className="inline-flex w-fit items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
                         >
                             <ArrowLeftIcon className="size-4" />
