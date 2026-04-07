@@ -1,4 +1,13 @@
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+    Empty,
+    EmptyContent,
+    EmptyHeader,
+    EmptyTitle,
+    EmptyDescription,
+    EmptyMedia,
+} from '@/components/ui/empty';
 import {
     InputGroup,
     InputGroupAddon,
@@ -13,7 +22,7 @@ import {
 } from '@/components/ui/item';
 import { Separator } from '@/components/ui/separator';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { SearchIcon } from 'lucide-react';
+import { RotateCcw, SearchIcon, SearchXIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -135,7 +144,33 @@ export default function JobList({ jobs }: { jobs: JobListing[] }) {
                                         </ItemGroup>
                                     </>
                                 ) : (
-                                    <div>Nothing here</div>
+                                    <Empty>
+                                        <EmptyHeader>
+                                            <EmptyMedia variant={'icon'}>
+                                                <SearchXIcon />
+                                            </EmptyMedia>
+                                            <EmptyTitle>
+                                                No Jobs Found
+                                            </EmptyTitle>
+                                            <EmptyDescription>
+                                                No existing jobs match your
+                                                search term: {search}. Try
+                                                searching something else.
+                                            </EmptyDescription>
+                                        </EmptyHeader>
+                                        <EmptyContent>
+                                            <Button
+                                                size={'sm'}
+                                                onClick={() => {
+                                                    setSearch('');
+                                                    handleSearch('');
+                                                }}
+                                            >
+                                                <RotateCcw data-icon="inline-start" />
+                                                Reset Filters
+                                            </Button>
+                                        </EmptyContent>
+                                    </Empty>
                                 )}
 
                                 {/* Detail Preview */}
