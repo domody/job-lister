@@ -5,19 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class JobListingController extends Controller
 {
     public function index()
     {
-        return inertia('admin/jobs/index', [
+        return Inertia::render('admin/jobs/index', [
             'jobs' => JobListing::latest()->get(),
         ]);
     }
 
     public function create()
     {
-        return inertia('admin/jobs/create');
+        return Inertia::render('admin/jobs/create');
     }
 
     public function store(Request $request)
@@ -39,7 +40,7 @@ class JobListingController extends Controller
 
     public function edit(JobListing $job)
     {
-        return inertia('admin/jobs/edit', [
+        return Inertia::render('admin/jobs/edit', [
             'job' => $job,
         ]);
     }

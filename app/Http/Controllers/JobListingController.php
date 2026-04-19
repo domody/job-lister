@@ -28,7 +28,7 @@ class JobListingController extends Controller
             })
             ->get();
 
-        return inertia('public/jobs/list', [
+        return Inertia::render('public/jobs/list', [
             'jobs' => $jobs,
             'filters' => $request->only('search', 'type', 'salary_min', 'salary_max'),
         ]);
