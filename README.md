@@ -8,7 +8,10 @@ A simple job listing board. Supports public browsing with filtering, and an admi
 
 ### Requirements
 
-- idk
+- PHP 8.1+
+- Composer
+- Node.js & npm
+- A database supported by Laravel (MySQL, PostgreSQL, or SQLite)
 
 ### Setup 
 
