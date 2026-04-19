@@ -12,7 +12,7 @@ class JobListingController extends Controller
     public function index()
     {
         return Inertia::render('admin/jobs/index', [
-            'jobs' => JobListing::latest()->get(),
+            'jobs' => JobListing::latest()->paginate(20),
         ]);
     }
 

@@ -22,7 +22,7 @@ import {
 import { Head, Link, router } from '@inertiajs/react';
 import { BriefcaseIcon, PencilIcon, PlusIcon, Trash2Icon } from 'lucide-react';
 
-export default function AdminJobsIndex({ jobs }: { jobs: JobListing[] }) {
+export default function AdminJobsIndex({ jobs }: { jobs: Paginated<JobListing> }) {
     return (
         <>
             <Head title="Manage Listings" />
@@ -31,8 +31,8 @@ export default function AdminJobsIndex({ jobs }: { jobs: JobListing[] }) {
                     <div>
                         <h1 className="text-xl font-semibold">Job Listings</h1>
                         <p className="text-sm text-muted-foreground">
-                            {jobs.length}{' '}
-                            {jobs.length === 1 ? 'listing' : 'listings'} total
+                            {jobs.total}{' '}
+                            {jobs.total === 1 ? 'listing' : 'listings'} total
                         </p>
                     </div>
                     <Button size="sm" asChild>
@@ -43,9 +43,9 @@ export default function AdminJobsIndex({ jobs }: { jobs: JobListing[] }) {
                     </Button>
                 </div>
 
-                {jobs.length > 0 ? (
+                {jobs.data.length > 0 ? (
                     <div className="flex flex-col divide-y rounded-lg border">
-                        {jobs.map((job) => (
+                        {jobs.data.map((job) => (
                             <div
                                 key={job.id}
                                 className="flex items-center justify-between px-4 py-3"
@@ -114,6 +114,30 @@ export default function AdminJobsIndex({ jobs }: { jobs: JobListing[] }) {
                             </Button>
                         </EmptyContent>
                     </Empty>
+                )}
+
+                {jobs.last_page > 1 && (
+                    <div className="flex items-center justify-end gap-3">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            disabled={!jobs.prev_page_url}
+                            onClick={() => jobs.prev_page_url && router.get(jobs.prev_page_url)}
+                        >
+                            Previous
+                        </Button>
+                        <span className="text-sm text-muted-foreground">
+                            Page {jobs.current_page} of {jobs.last_page}
+                        </span>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            disabled={!jobs.next_page_url}
+                            onClick={() => jobs.next_page_url && router.get(jobs.next_page_url)}
+                        >
+                            Next
+                        </Button>
+                    </div>
                 )}
             </div>
         </>
